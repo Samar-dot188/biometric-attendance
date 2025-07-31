@@ -1,19 +1,20 @@
-FROM php:8.2-cli
+FROM php:8.2-apache
 
-# Install any needed PHP extensions (adjust as needed)
+# Install required PHP extensions
 RUN apt-get update && apt-get install -y \
-    php-mysqli \
-    php-curl \
-    php-gd \
-    php-zip \
-    && rm -rf /var/lib/apt/lists/*
+    libpng-dev \
+    libjpeg-dev \
+    libonig-dev \
+    libxml2-dev \
+    zip \
+    unzip \
+    && docker-php-ext-install mysqli gd
 
-# Copy your project into the container
-COPY . /app
-WORKDIR /app/public
+# Change Apache port to 10000 (Render requirement)
+RUN sed -i 's/80/10000/g' /etc/apache2/ports.conf /etc/apache2/sites-available/000-default.conf
 
-# Expose the port Render expects (must be 10000)
+# Copy your public app files to Apache's root
+COPY ./public/ /var/www/html/
+
+# Expose the port for Render
 EXPOSE 10000
-
-# Start the built-in PHP server serving the /public folder
-CMD ["php", "-S", "0.0.0.0:10000", "-t", "."]
