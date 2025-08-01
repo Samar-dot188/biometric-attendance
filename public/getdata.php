@@ -40,7 +40,8 @@ if (isset($_GET['FingerID']) && isset($_GET['device_token'])) {
                         if ($row['username'] != "None" && $row['add_fingerid'] == 0){
                             $Uname = $row['username'];
                             $Number = $row['serialnumber'];
-                            $sql = "SELECT * FROM users_logs WHERE fingerprint_id=? AND checkindate=? AND timeout='' AND fingerout=0";
+                            $sql = "SELECT * FROM users_logs WHERE fingerprint_id=? AND checkindate=? AND timeout='00:00:00' AND fingerout=0";
+
                             $result = mysqli_stmt_init($conn);
                             if (!mysqli_stmt_prepare($result, $sql)) {
                                 echo "SQL_Error_Select_logs";
