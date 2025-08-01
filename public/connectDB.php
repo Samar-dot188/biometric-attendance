@@ -1,9 +1,9 @@
 <?php
 /* Database connection settings */
-	$servername = "sql211.infinityfree.com";
-    $username = "if0_39564165";		//put your phpmyadmin username.(default is "root")
-    $password = "Samhridh2011";			//if your phpmyadmin has a password put it here.(default is "root")
-    $dbname = "if0_39564165_biometricattendance";
+	$servername = "sql12.freesqldatabase.com";
+    $username = "sql12792953";		//put your phpmyadmin username.(default is "root")
+    $password = "4ZIUIbdUFw";			//if your phpmyadmin has a password put it here.(default is "root")
+    $dbname = "sql12792953";
     
 	$conn = mysqli_connect($servername, $username, $password, $dbname);
 	
