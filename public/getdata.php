@@ -1,7 +1,7 @@
 <?php  
 //Connect to database
 require 'connectDB.php';
-date_default_timezone_set('Asia/Damascus');
+date_default_timezone_set('Asia/Kolkata');
 $d = date("Y-m-d");
 $t = date("H:i:sa");
 
@@ -40,7 +40,7 @@ if (isset($_GET['FingerID']) && isset($_GET['device_token'])) {
                         if ($row['username'] != "None" && $row['add_fingerid'] == 0){
                             $Uname = $row['username'];
                             $Number = $row['serialnumber'];
-                            $sql = "SELECT * FROM users_logs WHERE fingerprint_id=? AND checkindate=? AND timeout=''";
+                            $sql = "SELECT * FROM users_logs WHERE fingerprint_id=? AND checkindate=? AND timeout='' AND fingerout=0";
                             $result = mysqli_stmt_init($conn);
                             if (!mysqli_stmt_prepare($result, $sql)) {
                                 echo "SQL_Error_Select_logs";
@@ -72,17 +72,17 @@ if (isset($_GET['FingerID']) && isset($_GET['device_token'])) {
                                 //*****************************************************
                                 //Logout
                                 else{
-                                    $sql="UPDATE users_logs SET timeout=?, fingerout=1 WHERE fingerprint_id=? AND checkindate=? AND fingerout=0";
+                                    $sql = "UPDATE users_logs SET timeout=?, fingerout=1 WHERE fingerprint_id=? AND checkindate=? AND fingerout=0";
                                     $result = mysqli_stmt_init($conn);
+                                    
                                     if (!mysqli_stmt_prepare($result, $sql)) {
                                         echo "SQL_Error_insert_logout1";
                                         exit();
-                                    }
-                                    else{
+                                    } else {
                                         mysqli_stmt_bind_param($result, "sis", $t, $fingerID, $d);
                                         mysqli_stmt_execute($result);
-
-                                        echo "logout".$Uname;
+                                    
+                                        echo "logout" . $Uname;
                                         exit();
                                     }
                                 }
