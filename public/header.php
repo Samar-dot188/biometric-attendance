@@ -7,7 +7,7 @@
 <header>
 <div class="header">
 	<div class="logo">
-		<a href="index.php">Biometric Attendance</a>
+		<a href="index.php">Attentance System</a>
 	</div>
 </div>
 <?php  
@@ -83,6 +83,16 @@
 	    x.className = "topnav";
 	  }
 	}
+
+	$(document).ready(function(){
+		var page = location.pathname.split('/').pop();
+		$('#myTopnav a').each(function(){
+			var href = $(this).attr('href');
+			if(href == page){
+				$(this).addClass('active');
+			}
+		});
+	});
 </script>
 
 <!-- Account Update -->
@@ -97,16 +107,16 @@
       </div>
       <form action="ac_update.php" method="POST" enctype="multipart/form-data">
 	      <div class="modal-body">
-	      	<label for="User-mail"><b>Admin Name:</b></label>
+		<label for="User-mail" class="form-label"><b>Admin Name:</b></label>
 	      	<input type="text" name="up_name" placeholder="Enter your Name..." value="<?php echo $_SESSION['Admin-name']; ?>" required/><br>
-	      	<label for="User-mail"><b>Admin E-mail:</b></label>
+		<label for="User-mail" class="form-label"><b>Admin E-mail:</b></label>
 	      	<input type="email" name="up_email" placeholder="Enter your E-mail..." value="<?php echo $_SESSION['Admin-email']; ?>" required/><br>
-	      	<label for="User-psw"><b>Password</b></label>
+		<label for="User-psw" class="form-label"><b>Password</b></label>
 	      	<input type="password" name="up_pwd" placeholder="Enter your Password..." required/><br>
 	      </div>
 	      <div class="modal-footer">
-	        <button type="submit" name="update" class="btn btn-success">Save changes</button>
-	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	        <button type="submit" name="update" class="btn btn-primary">Save changes</button>
+	        <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
 	      </div>
 	  </form>
     </div>
