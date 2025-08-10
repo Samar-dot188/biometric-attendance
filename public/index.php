@@ -25,11 +25,11 @@ if (!isset($_SESSION['Admin-name'])) {
 <body>
 <?php include'header.php'; ?> 
 <main>
-<section>
+<section class="container">
   <h1 class="slideInDown animated">Here are all the Users</h1>
   <!--User table-->
-  <div class="table-responsive slideInRight animated" style="max-height: 400px;"> 
-    <table class="table">
+  <div class="table-responsive slideInRight animated">
+    <table class="table table-striped table-bordered">
       <thead class="table-primary">
         <tr>
           <th>ID | Name</th>
