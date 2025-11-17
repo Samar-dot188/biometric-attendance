@@ -1,14 +1,30 @@
 <?php
-/* Database connection settings */
-	$servername = "sql305.infinityfree.com";
-    $username = "if0_40436294";		//put your phpmyadmin username.(default is "root")
-    $password = "j1Y8nflG9IA";			//if your phpmyadmin has a password put it here.(default is "root")
-    $dbname = "if0_40436294_biometricattendance";
+$host = "biometric-attendance-gosaliasamar-856e.d.aivencloud.com";
+$port = 10249;
+$user = "avnadmin";
+$pass = "AVNS_0ayC5qViELEnK-G8qRN";
+$db   = "defaultdb";
 
-    
-	$conn = mysqli_connect($servername, $username, $password, $dbname);
-	
-	if ($conn->connect_error) {
-        die("Database Connection failed: " . $conn->connect_error);
-    }
+// SSL certificate from Aiven
+$ssl_ca = __DIR__ . "/ca.pem";
+
+$conn = mysqli_init();
+
+// Enable SSL for Aiven
+mysqli_ssl_set($conn, NULL, NULL, $ssl_ca, NULL, NULL);
+
+// Connect with port
+if (!mysqli_real_connect(
+        $conn,
+        $host,
+        $user,
+        $pass,
+        $db,
+        $port,
+        NULL,
+        MYSQLI_CLIENT_SSL
+    )) {
+
+    die("Connection failed: " . mysqli_connect_error());
+}
 ?>
